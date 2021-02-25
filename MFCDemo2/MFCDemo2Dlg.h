@@ -14,7 +14,7 @@ public:
 
 // Dialog Data
 #ifdef AFX_DESIGN_TIME
-	enum { IDD = IDD_MFCDEMO2_DIALOG };
+	enum { IDD = IDD_ECHOBUTTONEVENT_DIALOG };
 #endif
 
 	protected:
@@ -30,4 +30,20 @@ protected:
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnBnClickedButtonAdd();
+
+private: 
+	int m_OkCount;
+	CString m_EchoText;
+public:
+	afx_msg void OnStnClickedVSliderEcho();
+private:
+	CString m_VSliderEcho;
+public:
+	CSliderCtrl m_VSliderBar;
+	afx_msg void OnVScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar);
+	CSliderCtrl m_HSliderBar;
+	afx_msg void OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar);
+	CString mHSliderBarEcho;
 };
