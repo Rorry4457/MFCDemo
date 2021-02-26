@@ -22,6 +22,8 @@ CMFCDemo2Dlg::CMFCDemo2Dlg(CWnd* pParent /*=nullptr*/)
 	, m_EchoText(_T(""))
 	, m_VSliderEcho(_T(""))
 	, mHSliderBarEcho(_T(""))
+	, m_TImerEcho(_T(""))
+	, m_MouseEcho(_T(""))
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -34,6 +36,8 @@ void CMFCDemo2Dlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_V_SLIDE_BAR, m_VSliderBar);
 	DDX_Control(pDX, IDC_H_SLIDER_BAR, m_HSliderBar);
 	DDX_Text(pDX, IDC_H_SLIDER_ECHO, mHSliderBarEcho);
+	DDX_Text(pDX, IDC_TIMER_ECHO, m_TImerEcho);
+	DDX_Text(pDX, IDC_MOUSE_POSITION_ECHO, m_MouseEcho);
 }
 
 BEGIN_MESSAGE_MAP(CMFCDemo2Dlg, CDialogEx)
@@ -43,6 +47,11 @@ BEGIN_MESSAGE_MAP(CMFCDemo2Dlg, CDialogEx)
 	ON_STN_CLICKED(IDC_V_SLIDER_ECHO, &CMFCDemo2Dlg::OnStnClickedVSliderEcho)
 	ON_WM_VSCROLL()
 	ON_WM_HSCROLL()
+	ON_WM_TIMER()
+	ON_STN_CLICKED(IDC_TIMER_ECHO, &CMFCDemo2Dlg::OnStnClickedTimerEcho)
+	ON_WM_LBUTTONDOWN()
+	ON_WM_RBUTTONDOWN()
+	ON_WM_MOUSEMOVE()
 END_MESSAGE_MAP()
 
 
@@ -61,11 +70,13 @@ BOOL CMFCDemo2Dlg::OnInitDialog()
 	m_OkCount = 0;
 	m_VSliderBar.SetRange(0, 100, true);
 	m_VSliderBar.SetPos(0);
-	m_VSliderEcho.Format(_T("%d"), 0);
 
 	m_HSliderBar.SetRange(0, 100, true);
 	m_HSliderBar.SetPos(0);
 	m_VSliderEcho.Format(_T("%d"), 0);
+
+	m_Seconds = 0;
+	SetTimer(0, 1000, NULL);
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
@@ -146,4 +157,39 @@ void CMFCDemo2Dlg::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
 		CDialogEx::OnHScroll(nSBCode, nPos, pScrollBar);
 	}
 	
+}
+
+
+void CMFCDemo2Dlg::OnTimer(UINT_PTR nIDEvent)
+{
+	m_Seconds++;
+	m_TImerEcho.Format(_T("%d seconds have passed"), m_Seconds);
+	UpdateData(false);
+}
+
+
+void CMFCDemo2Dlg::OnStnClickedTimerEcho()
+{
+	// TODO: Add your control notification handler code here
+}
+
+
+void CMFCDemo2Dlg::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	m_MouseEcho.Format(_T("Left Mouse down at %d %d"), point.x, point.y);
+	UpdateData(false);
+}
+
+
+void CMFCDemo2Dlg::OnRButtonDown(UINT nFlags, CPoint point)
+{
+	m_MouseEcho.Format(_T("Right Mouse down at %d %d"), point.x, point.y);
+	UpdateData(false);
+}
+
+
+void CMFCDemo2Dlg::OnMouseMove(UINT nFlags, CPoint point)
+{
+	m_MouseEcho.Format(_T("Mouse Move At %d %d"), point.x, point.y);
+	UpdateData(false);
 }

@@ -46,4 +46,16 @@ public:
 	CSliderCtrl m_HSliderBar;
 	afx_msg void OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar);
 	CString mHSliderBarEcho;
+private:
+	CString m_TImerEcho;
+	int m_Seconds;
+public:
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
+	afx_msg void OnStnClickedTimerEcho();
+private:
+	CString m_MouseEcho;
+public:
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnRButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 };
