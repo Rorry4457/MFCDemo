@@ -14,6 +14,8 @@
 #define IDC_H_SLIDER_ECHO               1008
 #define IDC_TIMER_ECHO                  1009
 #define IDC_MOUSE_POSITION_ECHO         1010
+#define IDC_CHECK1                      1011
+#define IDC_TIMER_CONTROL_SLIDERS       1011
 
 // Next default values for new objects
 // 
@@ -21,7 +23,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        130
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1011
+#define _APS_NEXT_CONTROL_VALUE         1012
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

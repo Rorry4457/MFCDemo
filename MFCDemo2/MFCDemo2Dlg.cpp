@@ -24,6 +24,7 @@ CMFCDemo2Dlg::CMFCDemo2Dlg(CWnd* pParent /*=nullptr*/)
 	, mHSliderBarEcho(_T(""))
 	, m_TImerEcho(_T(""))
 	, m_MouseEcho(_T(""))
+	, m_TimerCtrlSliders(FALSE)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -38,6 +39,7 @@ void CMFCDemo2Dlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_H_SLIDER_ECHO, mHSliderBarEcho);
 	DDX_Text(pDX, IDC_TIMER_ECHO, m_TImerEcho);
 	DDX_Text(pDX, IDC_MOUSE_POSITION_ECHO, m_MouseEcho);
+	DDX_Check(pDX, IDC_TIMER_CONTROL_SLIDERS, m_TimerCtrlSliders);
 }
 
 BEGIN_MESSAGE_MAP(CMFCDemo2Dlg, CDialogEx)
@@ -52,6 +54,7 @@ BEGIN_MESSAGE_MAP(CMFCDemo2Dlg, CDialogEx)
 	ON_WM_LBUTTONDOWN()
 	ON_WM_RBUTTONDOWN()
 	ON_WM_MOUSEMOVE()
+	ON_BN_CLICKED(IDC_TIMER_CONTROL_SLIDERS, &CMFCDemo2Dlg::OnBnClickedTimerControlSliders)
 END_MESSAGE_MAP()
 
 
@@ -77,6 +80,9 @@ BOOL CMFCDemo2Dlg::OnInitDialog()
 
 	m_Seconds = 0;
 	SetTimer(0, 1000, NULL);
+
+	m_TimerCtrlSliders = true;
+	UpdateData(false);
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
@@ -165,6 +171,25 @@ void CMFCDemo2Dlg::OnTimer(UINT_PTR nIDEvent)
 	m_Seconds++;
 	m_TImerEcho.Format(_T("%d seconds have passed"), m_Seconds);
 	UpdateData(false);
+
+	if (m_TimerCtrlSliders) {
+
+		int hValue = m_HSliderBar.GetPos();
+		if (hValue > 0) {
+			m_HSliderBar.SetPos(hValue - 1);
+			mHSliderBarEcho.Format(_T("%d"), hValue - 1);
+		}
+
+		int vValue = m_VSliderBar.GetPos();
+		if (vValue > 0) {
+			m_VSliderBar.SetPos(vValue - 1);
+			mHSliderBarEcho.Format(_T("%d"), vValue - 1);
+		}
+
+		if (hValue == 0 && vValue == 0) {
+			m_TimerCtrlSliders = false;
+		}
+	}
 }
 
 
@@ -193,3 +218,12 @@ void CMFCDemo2Dlg::OnMouseMove(UINT nFlags, CPoint point)
 	m_MouseEcho.Format(_T("Mouse Move At %d %d"), point.x, point.y);
 	UpdateData(false);
 }
+
+
+void CMFCDemo2Dlg::OnBnClickedTimerControlSliders()
+{
+	UpdateData(true);
+}
+
+
+

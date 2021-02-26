@@ -58,4 +58,8 @@ public:
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 	afx_msg void OnRButtonDown(UINT nFlags, CPoint point);
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
+private:
+	BOOL m_TimerCtrlSliders;
+public:
+	afx_msg void OnBnClickedTimerControlSliders();
 };
