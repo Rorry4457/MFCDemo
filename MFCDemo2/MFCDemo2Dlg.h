@@ -62,4 +62,5 @@ private:
 	BOOL m_TimerCtrlSliders;
 public:
 	afx_msg void OnBnClickedTimerControlSliders();
+	afx_msg void OnBnClickedGuideButton();
 };

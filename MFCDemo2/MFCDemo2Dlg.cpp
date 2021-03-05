@@ -7,6 +7,7 @@
 #include "MFCDemo2.h"
 #include "MFCDemo2Dlg.h"
 #include "afxdialogex.h"
+#include "DemoPropertySheet.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -55,6 +56,7 @@ BEGIN_MESSAGE_MAP(CMFCDemo2Dlg, CDialogEx)
 	ON_WM_RBUTTONDOWN()
 	ON_WM_MOUSEMOVE()
 	ON_BN_CLICKED(IDC_TIMER_CONTROL_SLIDERS, &CMFCDemo2Dlg::OnBnClickedTimerControlSliders)
+	ON_BN_CLICKED(IDC_GUIDE_BUTTON, &CMFCDemo2Dlg::OnBnClickedGuideButton)
 END_MESSAGE_MAP()
 
 
@@ -130,12 +132,11 @@ void CMFCDemo2Dlg::OnBnClickedButtonAdd()
 	m_OkCount++;
 	m_EchoText.Format(_T("%d"), m_OkCount);
 	UpdateData(false);
-}
 
+}
 
 void CMFCDemo2Dlg::OnStnClickedVSliderEcho()
 {
-	// TODO: Add your control notification handler code here
 }
 
 
@@ -227,3 +228,12 @@ void CMFCDemo2Dlg::OnBnClickedTimerControlSliders()
 
 
 
+
+
+void CMFCDemo2Dlg::OnBnClickedGuideButton()
+{
+	// TODO: Add your control notification handler code here
+	DemoPropertySheet sheet(_T("AXG"));
+	sheet.SetWizardMode();
+	sheet.DoModal();
+}

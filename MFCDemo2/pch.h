@@ -9,5 +9,9 @@
 
 // add headers that you want to pre-compile here
 #include "framework.h"
+#include <afxcontrolbars.h>
+#include <afxcontrolbars.h>
+#include <afxcontrolbars.h>
+#include <afxdlgs.h>
 
 #endif //PCH_H
